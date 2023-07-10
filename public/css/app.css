@@ -1,0 +1,36 @@
+
+#footer {
+    padding: 0 40px 0 40px;
+}
+
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: left;
+    align-items: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.hobbies {
+    /*border: 1px solid #ced4da;*/
+    /*border-radius: 0.375rem;*/
+    padding: 1rem;
+ }
+
+.legend {
+    background-color: #ced4da;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 0.375rem;
+    text-align: center;
+}
+
+[aria-invalid] {
+    background-color: #f5b2b2;
+}
+
+.myTable {
+    padding: 3% 5%;
+}

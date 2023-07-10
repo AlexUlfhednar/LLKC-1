@@ -1,0 +1,288 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <div class="auth-wrapper">
+
+        <div class="card" style="width: 40rem;">
+            <div class="card-body">
+                <h5 class="card-title">Update</h5>
+
+                {% if errors %}
+                    <div class="alert alert-danger">
+                        <ul>
+                            {% for error in errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                <form method="post"
+                      action="/update/{{ properties.basic_id }}"
+                      id="update"
+                      name="update"
+                      class="row g-3 needs-validation"
+                      novalidate>
+                    <div class="legend">Basic</div>
+                    <div class="col-md-6">
+                        <label for="name" class="form-label">Name</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="name"
+                                name="name"
+                                pattern="[A-Za-z0-9]{2,}"
+                                value="{{ properties.name }}"
+                                required>
+                        <div class="invalid-feedback">
+                            Name must be at least 2 characters
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="surname" class="form-label">Surname</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="surname"
+                                name="surname"
+                                pattern="[A-Za-z0-9]{3,}"
+                                value="{{ properties.surname }}"
+                                required>
+                        <div class="invalid-feedback">
+                            Surname must be at least 3 characters
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Email</label>
+                        <input
+                                type="email"
+                                class="form-control"
+                                id="email"
+                                name="email"
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                value="{{ properties.email }}"
+                                required>
+                        <div class="invalid-feedback">
+                            Invalid email address
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="password" class="form-label">Password</label>
+                        <input
+                                type="password"
+                                class="form-control"
+                                id="password"
+                                name="password"
+                                pattern="\d{3,3}"
+                                value="{{ properties.password }}"
+                                required>
+                        <div class="invalid-feedback">
+                            Password must be 3 digits.
+                        </div>
+                    </div>
+
+                    <div class="legend">Additional</div>
+                    <div class="col-12">
+                        <label for="address" class="form-label">Address</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="address"
+                                name="address"
+                                placeholder="1234 Main St"
+                                pattern="[a-zA-Z][a-zA-Z\s\x27,.-]+"
+                                value="{{ properties.address }}"
+                                required>
+                        <div class="invalid-feedback">
+                            Invalid address.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="city" class="form-label">City</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="city"
+                                name="city"
+                                pattern="[A-Za-z0-9]{2,}"
+                                value="{{ properties.city }}"
+                                required>
+                        <div class="invalid-feedback">
+                            City must be at least 2 characters
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="country" class="form-label">Country</label>
+                        <select id="country" name="country" class="form-select" required>
+                            <option>{{ properties.country }}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="postal" class="form-label">Postal code</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="postal"
+                                name="postal"
+                                pattern="\d{4,4}"
+                                value="{{ properties.postal }}"
+                                required>
+                        <div class="invalid-feedback">
+                            Must be 4 digits.
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input
+                                type="tel"
+                                class="form-control"
+                                id="phone"
+                                name="phone"
+                                placeholder="Phone number"
+                                pattern="\d{9}"
+                                value="{{ properties.phone }}"
+                                required>
+                        <div class="invalid-feedback">
+                            Invalid Phone Number.
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="comments" class="form-label">Comments</label>
+                        <textarea class="form-control" id="comments" name="comments" required>{{ properties.phone }}</textarea>
+                    </div>
+
+                    <div class="legend">Special</div>
+                    <div class="col-md-6">
+                        <label for="dateFrom" class="col-form-label">Date from</label>
+                        <div class="col-7">
+                            <div class="input-group date" id="datepickerFrom">
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                        id="dateFrom"
+                                        value="{{ properties.dateFrom }}"
+                                        name="dateFrom"/>
+                                <span class="input-group-append">
+                                  <span class="input-group-text bg-light d-block">
+                                    <i class="bi bi-calendar"></i>
+                                  </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="dateTo" class="col-form-label">Date to</label>
+                        <div class="col-7">
+                            <div class="input-group date" id="datepickerTo">
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                        id="dateTo"
+                                        value="{{ properties.dateTo }}"
+                                        name="dateTo"/>
+                                <span class="input-group-append">
+                                  <span class="input-group-text bg-light d-block">
+                                    <i class="bi bi-calendar"></i>
+                                  </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-check form-check-inline">
+                            <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="radio"
+                                    id="radioYes"
+                                    value="yes"
+                                    {{ properties.radio == 'yes' ? 'checked' : '' }}
+                            >
+                            <label class="form-check-label" for="radioYes">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="radio"
+                                    id="radioNo"
+                                    value="no"
+                                    {{ properties.radio == 'no' ? 'checked' : '' }}
+                            >
+                            <label class="form-check-label" for="radioNo">No</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="legend">Hobbies</div>
+                        <fieldset class="hobbies">
+                            <div class="form-check form-check-inline">
+                                <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        id="cycling"
+                                        name="hobbies[]"
+                                        value="cycling"
+                                        {{ properties.cycling == 1 ? 'checked' : '' }}
+                                >
+                                <label class="form-check-label" for="cycling">Cycling</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        id="swimming"
+                                        name="hobbies[]"
+                                        value="swimming"
+                                        {{ properties.swimming == 1 ? 'checked' : '' }}
+                                >
+                                <label class="form-check-label" for="swimming">Swimming</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        id="rowing"
+                                        name="hobbies[]"
+                                        value="rowing"
+                                        {{ properties.rowing == 1 ? 'checked' : '' }}
+                                >
+                                <label class="form-check-label" for="rowing">Rowing</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        id="basketball"
+                                        name="hobbies[]"
+                                        value="basketball"
+                                        {{ properties.basketball == 1 ? 'checked' : '' }}
+                                >
+                                <label class="form-check-label" for="basketball">Basketball</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        id="football"
+                                        name="hobbies[]"
+                                        value="football"
+                                        {{ properties.football == 1 ? 'checked' : '' }}
+                                >
+                                <label class="form-check-label" for="football">Football</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div id="error"></div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary" id="accept">Update</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

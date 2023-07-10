@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block menu %}
+    <ul class="nav justify-content-end">
+        <li class="nov-item">
+            <a class="nav-link disabled" href="/home">Home</a>
+        </li>
+        <li class="nov-item">
+            <a class="nav-link" href="/logout">Logout</a>
+        </li>
+        <li class="nov-item">
+            <a class="nav-link disabled" href="/">
+                <i class="bi bi-person-fill"></i>
+                {{ user }}
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+<div class="myTable">
+    <table id="myTable" class="table table-striped" style="width:100%">
+        <thead>
+        <tr>
+            <th>Nr.</th>
+            <th>User name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>Phone</th>
+            <th>Date from</th>
+            <th>Date to</th>
+            <th>Radio button</th>
+            <th>Cycling</th>
+            <th>Swimming</th>
+            <th>Rowing</th>
+            <th>Basketball</th>
+            <th>Football</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for val in results %}
+
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ val.name ~ ' ' ~ val.surname }}</td>
+                <td>{{ val.email }}</td>
+                <td>{{ val.address }}</td>
+                <td>{{ val.city }}</td>
+                <td>{{ val.country }}</td>
+                <td>{{ val.phone }}</td>
+                <td>{{ val.dateFrom }}</td>
+                <td>{{ val.dateTo }}</td>
+                <td>{{ val.radio }}</td>
+                <td>{{ val.cycling ? 'yes' }}</td>
+                <td>{{ val.swimming ? 'yes' }}</td>
+                <td>{{ val.rowing ? 'yes' }}</td>
+                <td>{{ val.basketball ? 'yes' }}</td>
+                <td>{{ val.football ? 'yes' }}</td>
+                <td>
+                    <a href="/update/{{ val.basic_id }}" class="text-decoration-none"><i class="bi bi-pencil-square"></i></a>&nbsp;&nbsp;
+                    <a href="/delete/{{ val.basic_id }}" class="text-decoration-none" onclick="return confirm('{{ 'Are you sure you want to delete this item?' }}');"><i class="bi bi-trash"></i></a>
+                </td>
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+</div>
+{% endblock %}
